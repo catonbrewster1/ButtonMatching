@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Button Bop</string>
-    <string name="timer">Timer: %1$d</string>
+    <string name="timer">Time: %1$d</string>
     <string name="tapMe">Click to Start Game</string>
     <string name="gameOverMessage">Nice job! You finished in %1$d second</string>
     <string name="aboutMenu">About</string>
