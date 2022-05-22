@@ -1,5 +1,8 @@
 package com.catonbrewster.buttonmatching
 
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.database.sqlite.SQLiteDatabase
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,7 +13,11 @@ import android.widget.Button
 import android.widget.GridView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.ActivityChooserView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.doOnLayout
+import com.google.android.material.snackbar.Snackbar
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.properties.Delegates
@@ -36,12 +43,8 @@ class MainActivity : AppCompatActivity() {
 
     private val numbers = generateSequence {(1..100).random()}
                                                     .distinct()
-                                                    .take(24)
+                                                    .take(2)
                                                     .toCollection(ArrayList())
-
-
-
-    //private val numbers =IntArray() { ((1..100).random()) }.toCollection(ArrayList())
     private val remainingNums = ArrayList(numbers)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -120,18 +123,19 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     private fun startGame() {
         startTimer()
         gameStarted = true
     }
 
-    private fun endGame() {
-        Toast.makeText(this, getString(R.string.gameOverMessage, seconds), Toast.LENGTH_LONG).show()
+    fun endGame() {
+        val mainView = findViewById<ConstraintLayout>(R.id.mainView)
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder.setMessage(getString(R.string.gameOverMessage, seconds))
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
         resetGame()
     }
-
-
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

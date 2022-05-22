@@ -52,7 +52,10 @@ class GridAdapter(private val context: Context,
 
         buttonView.setOnClickListener {
             if (remainingNums.size == 1) {
-                    //last button - end game
+                (context as MainActivity).hideButton(number)
+                remainingNums = (context as MainActivity).getRemainingNums() as ArrayList<Int>
+                this.notifyDataSetChanged()
+                (context as MainActivity).endGame()
             } else {
                 //buttons remain
                 if (number == remainingNums.minOrNull()) {
