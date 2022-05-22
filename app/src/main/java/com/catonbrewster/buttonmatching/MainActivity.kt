@@ -14,6 +14,7 @@ import androidx.core.view.doOnLayout
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.properties.Delegates
+import kotlin.random.Random.Default.nextInt
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,7 +34,14 @@ class MainActivity : AppCompatActivity() {
         private const val TIME = "TIME"
     }
 
-    private val numbers = IntArray(24) { ((1..100).random()) }.toCollection(ArrayList())
+    private val numbers = generateSequence {(1..100).random()}
+                                                    .distinct()
+                                                    .take(24)
+                                                    .toCollection(ArrayList())
+
+
+
+    //private val numbers =IntArray() { ((1..100).random()) }.toCollection(ArrayList())
     private val remainingNums = ArrayList(numbers)
 
     override fun onCreate(savedInstanceState: Bundle?) {
