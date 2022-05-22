@@ -6,4 +6,5 @@
     <string name="aboutMenu">About</string>
     <string name="aboutTitle">Time Fighter</string>
     <string name="aboutMessage">Create by The Mighty Kotlin Developer</string>
+    <string name="confirmQuit">Are you sure you want to quite the game?</string>
 </resources>

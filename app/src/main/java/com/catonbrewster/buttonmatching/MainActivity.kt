@@ -1,10 +1,13 @@
 package com.catonbrewster.buttonmatching
 
 import android.app.AlertDialog
+import android.content.DialogInterface
+import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.GridView
 import android.widget.TextView
@@ -66,6 +69,9 @@ class MainActivity : AppCompatActivity() {
         //consistent default state when the game starts
         timerTextView.text = getString(R.string.timer, initialTime)
         gridView.setAdapter(null)
+
+        startButton.setVisibility(View.VISIBLE)
+
         gameStarted = false
     }
 
@@ -80,6 +86,8 @@ class MainActivity : AppCompatActivity() {
         //fill grid
         val gridAdapter = GridAdapter(this@MainActivity, numbers)
         gridView.adapter = gridAdapter
+
+        startButton.setVisibility(View.GONE)
 
         startTimer()
         gameStarted = true
