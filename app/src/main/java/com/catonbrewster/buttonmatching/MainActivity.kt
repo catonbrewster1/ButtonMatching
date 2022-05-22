@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onCreate called.")
 
         timerTextView = findViewById(R.id.timerTextView)
+        timerTextView.setVisibility(View.GONE)
         timerTextView.text = getString(R.string.timer, seconds)
 
         gridView = findViewById(R.id.gridView)
@@ -52,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         quitButton = findViewById(R.id.quitButton)
+        quitButton.setVisibility(View.GONE)
         quitButton.setOnClickListener {
             resetGame()
         }
@@ -71,6 +73,8 @@ class MainActivity : AppCompatActivity() {
         gridView.setAdapter(null)
 
         startButton.setVisibility(View.VISIBLE)
+        quitButton.setVisibility(View.GONE)
+        timerTextView.setVisibility(View.GONE)
 
         gameStarted = false
     }
@@ -88,6 +92,8 @@ class MainActivity : AppCompatActivity() {
         gridView.adapter = gridAdapter
 
         startButton.setVisibility(View.GONE)
+        quitButton.setVisibility(View.VISIBLE)
+        timerTextView.setVisibility(View.VISIBLE)
 
         startTimer()
         gameStarted = true
