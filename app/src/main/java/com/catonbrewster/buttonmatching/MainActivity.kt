@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity() {
         private const val TIME = "TIME"
     }
 
+    private val numbers = IntArray(10) { (it + 1) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -38,6 +40,11 @@ class MainActivity : AppCompatActivity() {
         startButton = findViewById(R.id.startButton)
         timerTextView = findViewById(R.id.timerTextView)
         timerTextView.text = getString(R.string.timer, seconds)
+
+        gridView = findViewById(R.id.gridView)
+        //or use getApplicationContext() for context?
+        val gridAdapter = GridAdapter(getApplicationContext(), numbers)
+        gridView.adapter = gridAdapter
 
         startButton.setOnClickListener { view ->
             restoreGame()
