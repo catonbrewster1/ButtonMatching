@@ -26,26 +26,24 @@ import kotlin.random.Random.Default.nextInt
 
 class MainActivity : AppCompatActivity() {
 
-    internal lateinit var startButton: Button
-    internal lateinit var gridView: GridView
-
     internal var gameStarted = false
 
-    internal lateinit var timer: Timer
-    private var seconds = 0
-    internal val initialTime: Long = 0
+    internal lateinit var gridView: GridView
+    internal lateinit var startButton: Button
+    internal lateinit var quitButton: Button
     internal lateinit var timerTextView: TextView
+
+    internal val initialTime: Long = 0
+    private var seconds = 0
+
+    private lateinit var numbers: ArrayList<Int>
+    private lateinit var remainingNums: ArrayList<Int>
 
     companion object {
         private val TAG = MainActivity::class.java.simpleName
         private const val TIME = "TIME"
     }
 
-    private val numbers = generateSequence {(1..100).random()}
-                                                    .distinct()
-                                                    .take(2)
-                                                    .toCollection(ArrayList())
-    private val remainingNums = ArrayList(numbers)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,16 +51,19 @@ class MainActivity : AppCompatActivity() {
 
         Log.d(TAG, "onCreate called.")
 
-        startButton = findViewById(R.id.startButton)
         timerTextView = findViewById(R.id.timerTextView)
         timerTextView.text = getString(R.string.timer, seconds)
 
         gridView = findViewById(R.id.gridView)
-        val gridAdapter = GridAdapter(this@MainActivity, numbers)
-        gridView.adapter = gridAdapter
 
-        startButton.setOnClickListener { view ->
-            restoreGame()
+        startButton = findViewById(R.id.startButton)
+        startButton.setOnClickListener {
+            startGame()
+        }
+
+        quitButton = findViewById(R.id.quitButton)
+        quitButton.setOnClickListener {
+            resetGame()
         }
     }
 
@@ -77,55 +78,40 @@ class MainActivity : AppCompatActivity() {
     private fun resetGame() {
         //consistent default state when the game starts
         timerTextView.text = getString(R.string.timer, initialTime)
-        //reset grid here
+        gridView.setAdapter(null)
         gameStarted = false
     }
 
+    private fun startGame() {
+        //gen random numbers
+        numbers = generateSequence {(1..100).random()}
+            .distinct()
+            .take(24)
+            .toCollection(ArrayList())
+        remainingNums = ArrayList(numbers)
 
-    private fun restoreGame() {
+        //fill grid
+        val gridAdapter = GridAdapter(this@MainActivity, numbers)
+        gridView.adapter = gridAdapter
+
         startTimer()
-        //reset grid here
         gameStarted = true
     }
 
     private fun startTimer() {
-
-        // Get the text view.
         timerTextView.text = getString(R.string.timer, initialTime)
         seconds = 0
 
-        // Creates a new Handler
         val handler = Handler()
-
-        // Call the post() method,
-        // passing in a new Runnable.
-        // The post() method processes
-        // code without a delay,
-        // so the code in the Runnable
-        // will run almost immediately.
         handler.post(object : Runnable {
             override fun run() {
-                // Set the text view text.
-                timerTextView.text = getString(R.string.timer, seconds)
-
-                // If running is true, increment the
-                // seconds variable.
                 if (gameStarted) {
+                    timerTextView.text = getString(R.string.timer, seconds)
                     seconds++
+                    handler.postDelayed(this, 1000)
                 }
-
-                // Post the code again
-                // with a delay of 1 second.
-                handler.postDelayed(this, 1000)
             }
         })
-
-
-    }
-
-    private fun startGame() {
-        startTimer()
-        gameStarted = true
     }
 
     fun endGame() {

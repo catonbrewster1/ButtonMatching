@@ -22,6 +22,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/quitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="6dp"
+        android:text="Quit Game"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/pink"
+        app:background="@color/pink"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <GridView
         android:id="@+id/gridView"
         android:layout_width="match_parent"
