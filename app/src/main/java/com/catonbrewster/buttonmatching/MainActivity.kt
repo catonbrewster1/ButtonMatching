@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.doOnLayout
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.properties.Delegates
 
 
@@ -32,7 +33,8 @@ class MainActivity : AppCompatActivity() {
         private const val TIME = "TIME"
     }
 
-    private val numbers = IntArray(24) { ((1..100).random()) }
+    private val numbers = IntArray(24) { ((1..100).random()) }.toCollection(ArrayList())
+    private val remainingNums = ArrayList(numbers)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,12 +47,20 @@ class MainActivity : AppCompatActivity() {
         timerTextView.text = getString(R.string.timer, seconds)
 
         gridView = findViewById(R.id.gridView)
-        val gridAdapter = GridAdapter(getApplicationContext(), numbers)
+        val gridAdapter = GridAdapter(this@MainActivity, numbers)
         gridView.adapter = gridAdapter
 
         startButton.setOnClickListener { view ->
             restoreGame()
         }
+    }
+
+    fun hideButton(numToHide: Int) {
+        remainingNums.remove(numToHide)
+    }
+
+    fun getRemainingNums(): ArrayList<Int> {
+        return remainingNums
     }
 
     private fun resetGame() {
