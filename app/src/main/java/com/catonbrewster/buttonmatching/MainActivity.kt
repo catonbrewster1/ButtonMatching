@@ -14,6 +14,7 @@ import androidx.core.view.doOnLayout
 import java.util.*
 import kotlin.properties.Delegates
 
+
 class MainActivity : AppCompatActivity() {
 
     internal lateinit var startButton: Button
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         private const val TIME = "TIME"
     }
 
-    private val numbers = IntArray(24) { (it + 1) }
+    private val numbers = IntArray(24) { ((1..100).random()) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +45,6 @@ class MainActivity : AppCompatActivity() {
         timerTextView.text = getString(R.string.timer, seconds)
 
         gridView = findViewById(R.id.gridView)
-
-        //or use getApplicationContext() for context?
         val gridAdapter = GridAdapter(getApplicationContext(), numbers)
         gridView.adapter = gridAdapter
 

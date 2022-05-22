@@ -1,6 +1,7 @@
 package com.catonbrewster.buttonmatching
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ class GridAdapter(private val context: Context,
 
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
 
     override fun getCount(): Int {
         return dataSource.size
@@ -35,7 +37,7 @@ class GridAdapter(private val context: Context,
         // Get button element
         val buttonView = tileView.findViewById(R.id.gridButton) as Button
         buttonView.text = number.toString()
-        //buttonView.setBackgroundColor()
+        buttonView.setBackgroundColor(Color.parseColor("#F477BC"))
         buttonView.setOnClickListener {
             buttonView.text = "clicked"
         }
