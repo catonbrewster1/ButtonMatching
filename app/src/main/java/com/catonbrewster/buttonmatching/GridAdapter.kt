@@ -28,12 +28,14 @@ class GridAdapter(private val context: Context,
     override fun getView(pos: Int, convertView: View?, parent: ViewGroup): View {
         // Get view for tile in grid
         val tileView = inflater.inflate(R.layout.grid_button, parent, false)
+        tileView.minimumHeight = parent.height / 6
         val number = getItem(pos)
 
 
         // Get button element
         val buttonView = tileView.findViewById(R.id.gridButton) as Button
         buttonView.text = number.toString()
+        //buttonView.setBackgroundColor()
         buttonView.setOnClickListener {
             buttonView.text = "clicked"
         }
