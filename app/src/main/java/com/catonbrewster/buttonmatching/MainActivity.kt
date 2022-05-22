@@ -1,28 +1,15 @@
 package com.catonbrewster.buttonmatching
 
 import android.app.AlertDialog
-import android.content.DialogInterface
-import android.database.sqlite.SQLiteDatabase
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.os.Handler
 import android.util.Log
 import android.widget.Button
 import android.widget.GridView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.widget.ActivityChooserView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.view.doOnLayout
-import com.google.android.material.snackbar.Snackbar
-import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.properties.Delegates
-import kotlin.random.Random.Default.nextInt
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -108,8 +95,8 @@ class MainActivity : AppCompatActivity() {
                 if (gameStarted) {
                     timerTextView.text = getString(R.string.timer, seconds)
                     seconds++
-                    handler.postDelayed(this, 1000)
                 }
+                handler.postDelayed(this, 1000)
             }
         })
     }
