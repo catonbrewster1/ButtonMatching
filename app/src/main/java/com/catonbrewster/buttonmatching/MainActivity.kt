@@ -26,8 +26,8 @@ class MainActivity : AppCompatActivity() {
     internal val initialTime: Long = 0
     private var seconds = 0
 
-    private lateinit var numbers: ArrayList<Int>
-    private lateinit var remainingNums: ArrayList<Int>
+    lateinit var numbers: ArrayList<Int>
+    lateinit var remainingNums: ArrayList<Int>
 
     companion object {
         private val TAG = MainActivity::class.java.simpleName
@@ -57,13 +57,19 @@ class MainActivity : AppCompatActivity() {
         quitButton.setOnClickListener {
             resetGame()
         }
+
+        seconds = if (savedInstanceState != null) {
+            savedInstanceState.getInt(TIME)
+        } else {
+            0
+        }
     }
 
     fun hideButton(numToHide: Int) {
         remainingNums.remove(numToHide)
     }
 
-    fun getRemainingNums(): ArrayList<Int> {
+    fun seeRemainingNums(): ArrayList<Int> {
         return remainingNums
     }
 
@@ -79,7 +85,7 @@ class MainActivity : AppCompatActivity() {
         gameStarted = false
     }
 
-    private fun startGame() {
+    fun startGame() {
         //gen random numbers
         numbers = generateSequence {(1..100).random()}
             .distinct()
@@ -128,9 +134,10 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
 
         outState.putInt(TIME, seconds)
-        resetGame()
+        //cancel timer
+        //resetGame()
 
-        Log.d(TAG, "onSaveInstance State: Saving Score: Time is $seconds")
+        Log.d(TAG, "onSaveInstance State: Saving Time: Time is $seconds")
     }
 
     override fun onDestroy() {

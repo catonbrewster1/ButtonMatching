@@ -41,7 +41,7 @@ class GridAdapter(private val context: Context,
         buttonView.text = number.toString()
 
         //check if button should be visible
-        var remainingNums = (context as MainActivity).getRemainingNums() as ArrayList<Int>
+        var remainingNums = (context as MainActivity).seeRemainingNums() as ArrayList<Int>
         if (remainingNums.contains(number)) {
             buttonView.setVisibility(View.VISIBLE)
         } else {
@@ -53,7 +53,7 @@ class GridAdapter(private val context: Context,
         buttonView.setOnClickListener {
             if (remainingNums.size == 1) {
                 (context as MainActivity).hideButton(number)
-                remainingNums = (context as MainActivity).getRemainingNums() as ArrayList<Int>
+                remainingNums = (context as MainActivity).seeRemainingNums() as ArrayList<Int>
                 this.notifyDataSetChanged()
                 (context as MainActivity).endGame()
             } else {
@@ -61,7 +61,7 @@ class GridAdapter(private val context: Context,
                 if (number == remainingNums.minOrNull()) {
                     //success
                     (context as MainActivity).hideButton(number)
-                    remainingNums = (context as MainActivity).getRemainingNums() as ArrayList<Int>
+                    remainingNums = (context as MainActivity).seeRemainingNums() as ArrayList<Int>
                     this.notifyDataSetChanged()
                 }
                 else {
