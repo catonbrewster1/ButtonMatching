@@ -2,6 +2,7 @@ package com.catonbrewster.buttonmatching
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.res.Configuration
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,9 +16,8 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import kotlin.collections.ArrayList
 
-class MainActivity : AppCompatActivity() {
 
-    internal var gameStarted = false
+class MainActivity : AppCompatActivity() {
 
     internal lateinit var gridView: GridView
     internal lateinit var startButton: Button
@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity() {
     internal lateinit var timerTextView: TextView
 
     internal lateinit var timer: CountDownTimer
-    internal val maxTime: Long = 1000000
-    internal var seconds = 0
+    internal val maxTime: Long = 600000
+    internal var seconds: Long = 0
 
     internal var numbers: ArrayList<Int> = arrayListOf()
     internal var remainingNums: ArrayList<Int> = arrayListOf()
@@ -36,6 +36,15 @@ class MainActivity : AppCompatActivity() {
         private const val TIME = "TIME"
         private const val NUMBERS = "NUMBERS"
         private const val REMAINING_NUMBERS = "REMAINING_NUMBERS"
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig);
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            gridView.numColumns =  6
+        } else {
+            gridView.numColumns =  4
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,12 +61,7 @@ class MainActivity : AppCompatActivity() {
 
         startButton = findViewById(R.id.startButton)
         startButton.setOnClickListener {
-            numbers = generateSequence {(1..100).random()}
-                .distinct()
-                .take(24)
-                .toCollection(ArrayList())
-            remainingNums = ArrayList(numbers)
-            restoreGame()
+            startNewGame()
         }
 
         quitButton = findViewById(R.id.quitButton)
@@ -66,18 +70,14 @@ class MainActivity : AppCompatActivity() {
             resetGame()
         }
 
-
         if (savedInstanceState != null) {
-            Log.d(TAG, "savedInstanceState != null")
-            seconds = savedInstanceState.getInt(TIME)
+            Log.d(TAG, "Restoring Game from saved instance state")
+            seconds = savedInstanceState.getLong(TIME)
             numbers = savedInstanceState.getIntegerArrayList(NUMBERS) as ArrayList<Int>
             remainingNums = savedInstanceState.getIntegerArrayList(REMAINING_NUMBERS) as ArrayList<Int>
-            Log.d(TAG, "seconds in restored onCreate:$seconds")
-            Log.d(TAG, "numbers in restored onCreate:$numbers")
-            Log.d(TAG, "remainingNums in restored onCreate:$remainingNums")
             restoreGame()
         } else {
-            Log.d(TAG, "savedInstanceState == null")
+            Log.d(TAG, "Resetting New Game")
             resetGame()
         }
     }
@@ -101,19 +101,17 @@ class MainActivity : AppCompatActivity() {
         timerTextView.setVisibility(View.GONE)
 
 
-        val timeTillMax = maxTime - seconds.toLong()
-        timer =  object : CountDownTimer(timeTillMax,1000) {
+        timer =  object : CountDownTimer(maxTime,1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val time = (maxTime - millisUntilFinished) / 1000
                 timerTextView.text = getString(R.string.timer, time)
+                seconds = time
             }
 
             override fun onFinish() {
-                endGame()
+                timesUp()
             }
         }
-
-        gameStarted = false
     }
 
     private fun restoreGame() {
@@ -121,8 +119,6 @@ class MainActivity : AppCompatActivity() {
         timerTextView.text = getString(R.string.timer, seconds)
 
         //fill grid
-        Log.d(TAG, "numbers in restoreGame:$numbers")
-        Log.d(TAG, "remaining numbers in restoreGame:$remainingNums")
         val gridAdapter = GridAdapter(this@MainActivity, numbers)
         gridView.adapter = gridAdapter
 
@@ -130,29 +126,22 @@ class MainActivity : AppCompatActivity() {
         quitButton.setVisibility(View.VISIBLE)
         timerTextView.setVisibility(View.VISIBLE)
 
-        val timeTillMax = (maxTime - (seconds.toLong() * 1000))
-        Log.d(TAG, "timeTillMax in restoreGame:$timeTillMax")
+        val timeTillMax = (maxTime - (seconds * 1000))
         timer =  object : CountDownTimer(timeTillMax,1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val time = (maxTime - millisUntilFinished) / 1000
-                Log.d(TAG, "time in onTock:$time")
                 timerTextView.text = getString(R.string.timer, time)
-                val timeText = timerTextView.text
-                Log.d(TAG, "timerTextView.text in onTock:$timeText")
-                seconds = time.toInt()
-                Log.d(TAG, "seconds in onTock:$seconds")
+                seconds = time
             }
 
             override fun onFinish() {
-                endGame()
+                timesUp()
             }
         }
-
         timer.start()
-        gameStarted = true
     }
 
-    fun startGame() {
+    fun startNewGame() {
         //gen random numbers
         numbers = generateSequence {(1..100).random()}
             .distinct()
@@ -160,19 +149,10 @@ class MainActivity : AppCompatActivity() {
             .toCollection(ArrayList())
         remainingNums = ArrayList(numbers)
 
-        //fill grid
-        val gridAdapter = GridAdapter(this@MainActivity, numbers)
-        gridView.adapter = gridAdapter
-
-        startButton.setVisibility(View.GONE)
-        quitButton.setVisibility(View.VISIBLE)
-        timerTextView.setVisibility(View.VISIBLE)
-
-        timer.start()
-        gameStarted = true
+        restoreGame()
     }
 
-    fun endGame() {
+    fun wonGame() {
         val mainView = findViewById<ConstraintLayout>(R.id.mainView)
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
         builder.setMessage(getString(R.string.gameOverMessage, seconds))
@@ -181,10 +161,19 @@ class MainActivity : AppCompatActivity() {
         resetGame()
     }
 
+    fun timesUp() {
+        val mainView = findViewById<ConstraintLayout>(R.id.mainView)
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder.setMessage(getString(R.string.timesUp))
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+        resetGame()
+    }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-        outState.putInt(TIME, seconds)
+        outState.putLong(TIME, seconds)
         outState.putIntegerArrayList(NUMBERS, numbers)
         outState.putIntegerArrayList(REMAINING_NUMBERS, remainingNums)
         timer.cancel()
