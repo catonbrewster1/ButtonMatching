@@ -17,22 +17,6 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 class MainActivityTest {
 
-    @Test
-    fun timerStarts_whenStart() {
-        //Given
-        val controller = Robolectric.buildActivity(MainActivity::class.java)
-            .create()
-            .resume()
-            .visible()
-        val systemUnderTest = controller.get()
-
-        //When
-        val startButton = systemUnderTest.findViewById(R.id.startButton) as Button
-        startButton.performClick()
-
-        //Then
-        assertEquals(systemUnderTest.timerRunning, true)
-    }
 
     @Test
     fun newNumbers_whenStart() {
@@ -59,56 +43,19 @@ class MainActivityTest {
         assertEquals(4, 2 + 2)
     }
 
-    @Test
-    fun timerStops_whenGameEnds() {
-        //Given
-        val controller = Robolectric.buildActivity(MainActivity::class.java)
-            .create()
-            .resume()
-            .visible()
-        val systemUnderTest = controller.get()
-
-        //When
-        val quitButton = systemUnderTest.findViewById(R.id.quitButton) as Button
-        quitButton.performClick()
-
-        //Then
-        assertEquals(systemUnderTest.timerRunning, false)
-    }
 
     @Test
-    fun timerStops_whenQuit() {
-        //Given
-        val controller = Robolectric.buildActivity(MainActivity::class.java)
-            .create()
-            .resume()
-            .visible()
-        val systemUnderTest = controller.get()
-
-        //When
-        val quitButton = systemUnderTest.findViewById(R.id.quitButton) as Button
-        quitButton.performClick()
-
-        //Then
-        assertEquals(systemUnderTest.timerRunning, false)
-    }
-
-    @Test
-    fun timeConstant_whenOrientationTurns() {
+    fun timeNonZero_whenOrientationTurns() {
         //Given
         var controller = Robolectric.buildActivity(MainActivity::class.java)
             .create()
             .resume()
             .visible()
         var systemUnderTest: MainActivity = controller.get()
-        var scoreTextView: TextView = systemUnderTest.findViewById(R.id.gameScoreTextView) as TextView
-        val tapMeButton: Button = systemUnderTest.findViewById(R.id.tapMeButton) as Button
+        val startButton = systemUnderTest.findViewById(R.id.startButton) as Button
 
         //When
-        tapMeButton.performClick()
-        tapMeButton.performClick()
-        tapMeButton.performClick()
-        assertEquals("Your Score: 3", scoreTextView.text)
+        startButton.performClick()
 
         //Rotate Device
         val bundle = Bundle()
@@ -123,10 +70,10 @@ class MainActivityTest {
             .visible()
 
         val recreatedSystemUnderTest = controller.get()
-        scoreTextView = recreatedSystemUnderTest.findViewById(R.id.gameScoreTextView) as TextView
+        val newTimerTextView = recreatedSystemUnderTest.findViewById(R.id.timerTextView) as TextView
 
         //Then
-        assertEquals("Your Score: 3", scoreTextView.text)
+        assertNotEquals("0", newTimerTextView.text)
     }
 
     @Test

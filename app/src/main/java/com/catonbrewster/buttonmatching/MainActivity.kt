@@ -132,16 +132,15 @@ class MainActivity : AppCompatActivity() {
         val timeTillMax = (maxTime - (seconds * 1000))
         timer =  object : CountDownTimer(timeTillMax,1000) {
             override fun onTick(millisUntilFinished: Long) {
-                timerRunning = true
                 val time = (maxTime - millisUntilFinished) / 1000
                 timerTextView.text = getString(R.string.timer, time)
                 seconds = time
             }
 
             override fun onFinish() {
-                timerRunning = false
                 timesUp()
             }
+
         }
         timer.start()
     }
