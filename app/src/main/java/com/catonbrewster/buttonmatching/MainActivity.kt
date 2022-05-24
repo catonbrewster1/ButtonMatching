@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     internal lateinit var timer: CountDownTimer
     internal val maxTime: Long = 600000
     internal var seconds: Long = 0
+    internal var timerRunning: Boolean = false
 
     internal var numbers: ArrayList<Int> = arrayListOf()
     internal var remainingNums: ArrayList<Int> = arrayListOf()
@@ -103,12 +104,14 @@ class MainActivity : AppCompatActivity() {
 
         timer =  object : CountDownTimer(maxTime,1000) {
             override fun onTick(millisUntilFinished: Long) {
+                timerRunning = true
                 val time = (maxTime - millisUntilFinished) / 1000
                 timerTextView.text = getString(R.string.timer, time)
                 seconds = time
             }
 
             override fun onFinish() {
+                timerRunning = false
                 timesUp()
             }
         }
@@ -129,12 +132,14 @@ class MainActivity : AppCompatActivity() {
         val timeTillMax = (maxTime - (seconds * 1000))
         timer =  object : CountDownTimer(timeTillMax,1000) {
             override fun onTick(millisUntilFinished: Long) {
+                timerRunning = true
                 val time = (maxTime - millisUntilFinished) / 1000
                 timerTextView.text = getString(R.string.timer, time)
                 seconds = time
             }
 
             override fun onFinish() {
+                timerRunning = false
                 timesUp()
             }
         }

@@ -11,11 +11,12 @@ import java.lang.Integer.getInteger
 
 
 class GridAdapter(private val context: Context,
-                  private val dataSource: ArrayList<Int>) : BaseAdapter() {
+                  val dataSource: ArrayList<Int>) : BaseAdapter() {
 
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
+    var remainingNums: ArrayList<Int> = (context as MainActivity).seeRemainingNums()
 
     override fun getCount(): Int {
         return dataSource.size
@@ -46,7 +47,7 @@ class GridAdapter(private val context: Context,
         buttonView.text = number.toString()
 
         //check if button should be visible
-        var remainingNums = (context as MainActivity).seeRemainingNums() as ArrayList<Int>
+        remainingNums = (context as MainActivity).seeRemainingNums()
 
         if (remainingNums.contains(number)) {
             buttonView.setVisibility(View.VISIBLE)
@@ -59,7 +60,7 @@ class GridAdapter(private val context: Context,
         buttonView.setOnClickListener {
             if (remainingNums.size == 1) {
                 (context as MainActivity).hideButton(number)
-                remainingNums = (context as MainActivity).seeRemainingNums() as ArrayList<Int>
+                remainingNums = (context as MainActivity).seeRemainingNums()
                 this.notifyDataSetChanged()
                 (context as MainActivity).wonGame()
             } else {
@@ -67,7 +68,7 @@ class GridAdapter(private val context: Context,
                 if (number == remainingNums.minOrNull()) {
                     //success
                     (context as MainActivity).hideButton(number)
-                    remainingNums = (context as MainActivity).seeRemainingNums() as ArrayList<Int>
+                    remainingNums = (context as MainActivity).seeRemainingNums()
                     this.notifyDataSetChanged()
                 }
                 else {
