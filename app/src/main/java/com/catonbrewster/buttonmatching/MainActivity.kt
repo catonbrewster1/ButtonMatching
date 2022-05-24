@@ -130,12 +130,17 @@ class MainActivity : AppCompatActivity() {
         quitButton.setVisibility(View.VISIBLE)
         timerTextView.setVisibility(View.VISIBLE)
 
-        val timeTillMax = maxTime - seconds.toLong()
+        val timeTillMax = (maxTime - (seconds.toLong() * 1000))
+        Log.d(TAG, "timeTillMax in restoreGame:$timeTillMax")
         timer =  object : CountDownTimer(timeTillMax,1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val time = (maxTime - millisUntilFinished) / 1000
+                Log.d(TAG, "time in onTock:$time")
                 timerTextView.text = getString(R.string.timer, time)
+                val timeText = timerTextView.text
+                Log.d(TAG, "timerTextView.text in onTock:$timeText")
                 seconds = time.toInt()
+                Log.d(TAG, "seconds in onTock:$seconds")
             }
 
             override fun onFinish() {
