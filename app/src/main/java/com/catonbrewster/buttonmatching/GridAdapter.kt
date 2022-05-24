@@ -42,6 +42,7 @@ class GridAdapter(private val context: Context,
 
         //check if button should be visible
         var remainingNums = (context as MainActivity).seeRemainingNums() as ArrayList<Int>
+
         if (remainingNums.contains(number)) {
             buttonView.setVisibility(View.VISIBLE)
         } else {
