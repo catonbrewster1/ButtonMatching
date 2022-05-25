@@ -107,6 +107,9 @@ class MainActivity : AppCompatActivity() {
         quitButton.setVisibility(View.GONE)
         timerTextView.setVisibility(View.GONE)
 
+        if (timerRunning) {
+            timer.cancel()
+        }
 
         timer =  object : CountDownTimer(maxTime,1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -119,6 +122,7 @@ class MainActivity : AppCompatActivity() {
             override fun onFinish() {
                 timerRunning = false
                 timesUp()
+                timer.cancel()
             }
         }
     }
@@ -135,16 +139,23 @@ class MainActivity : AppCompatActivity() {
         quitButton.setVisibility(View.VISIBLE)
         timerTextView.setVisibility(View.VISIBLE)
 
+        if (timerRunning) {
+            timer.cancel()
+        }
+
         val timeTillMax = (maxTime - (seconds * 1000))
         timer =  object : CountDownTimer(timeTillMax,1000) {
             override fun onTick(millisUntilFinished: Long) {
+                timerRunning = true
                 val time = (maxTime - millisUntilFinished) / 1000
                 timerTextView.text = getString(R.string.timer, time)
                 seconds = time
             }
 
             override fun onFinish() {
+                timerRunning = false
                 timesUp()
+                timer.cancel()
             }
 
         }
