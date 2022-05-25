@@ -20,6 +20,7 @@ import kotlin.collections.ArrayList
 class MainActivity : AppCompatActivity() {
 
     internal lateinit var gridView: GridView
+    internal lateinit var gridAdapter: GridAdapter
     internal lateinit var startButton: Button
     internal lateinit var quitButton: Button
     internal lateinit var timerTextView: TextView
@@ -31,6 +32,8 @@ class MainActivity : AppCompatActivity() {
 
     internal var numbers: ArrayList<Int> = arrayListOf()
     internal var remainingNums: ArrayList<Int> = arrayListOf()
+
+    internal lateinit var wonGameDialog: AlertDialog
 
     companion object {
         private val TAG = MainActivity::class.java.simpleName
@@ -77,9 +80,11 @@ class MainActivity : AppCompatActivity() {
             numbers = savedInstanceState.getIntegerArrayList(NUMBERS) as ArrayList<Int>
             remainingNums = savedInstanceState.getIntegerArrayList(REMAINING_NUMBERS) as ArrayList<Int>
             restoreGame()
+            Log.d("seconds", "$seconds")
         } else {
             Log.d(TAG, "Resetting New Game")
             resetGame()
+            Log.d("seconds", "$seconds")
         }
     }
 
@@ -122,7 +127,7 @@ class MainActivity : AppCompatActivity() {
         timerTextView.text = getString(R.string.timer, seconds)
 
         //fill grid
-        val gridAdapter = GridAdapter(this@MainActivity, numbers)
+        gridAdapter = GridAdapter(this@MainActivity, numbers)
         gridView.adapter = gridAdapter
 
         startButton.setVisibility(View.GONE)
@@ -157,11 +162,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun wonGame() {
-        val mainView = findViewById<ConstraintLayout>(R.id.mainView)
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
         builder.setMessage(getString(R.string.gameOverMessage, seconds))
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
+        wonGameDialog = builder.create()
+        wonGameDialog.show()
         resetGame()
     }
 

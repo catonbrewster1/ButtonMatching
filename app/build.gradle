@@ -3,6 +3,10 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+tasks.withType(Test) {
+    systemProperty "robolectric.logging", "stdout"
+}
+
 android {
     compileSdkVersion 31
 
@@ -19,6 +23,9 @@ android {
     testOptions {
         unitTests {
             includeAndroidResources = true
+        }
+        tasks.withType(Test) {
+            systemProperty "robolectric.logging", "stdout"
         }
     }
 

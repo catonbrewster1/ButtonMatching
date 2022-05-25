@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.*
+import androidx.core.view.isVisible
 import java.lang.Integer.getInteger
 
 
@@ -77,9 +78,9 @@ class GridAdapter(private val context: Context,
                 }
             }
         }
-        Log.d("NEW MIN:", remainingNums.minOrNull().toString())
-        Log.d("ORIG LIST:", "$dataSource")
-        Log.d("NEW LIST:", "$remainingNums")
+        //Log.d("NEW MIN:", remainingNums.minOrNull().toString())
+        //Log.d("ORIG LIST:", "$dataSource")
+        //Log.d("NEW LIST:", "$remainingNums")
 
         return tileView
     }
