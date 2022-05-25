@@ -41,7 +41,7 @@
     <li>
       <a href="#getting-started">Getting Started</a>
     </li>
-    <li><a href="#expected-behavior">Usage</a></li>
+    <li><a href="#expected-behavior">Expected Behavior</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
