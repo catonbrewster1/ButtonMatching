@@ -98,7 +98,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun resetGame() {
         //consistent default state when the game starts
-        timerTextView.text = getString(R.string.timer, 0)
+        seconds = 0
+        timerTextView.text = getString(R.string.timer, seconds)
 
         gridView.setAdapter(null)
 
@@ -158,6 +159,7 @@ class MainActivity : AppCompatActivity() {
             .toCollection(ArrayList())
         remainingNums = ArrayList(numbers)
 
+        seconds = 0
         restoreGame()
     }
 
