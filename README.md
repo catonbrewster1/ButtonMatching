@@ -18,7 +18,7 @@
     <a href="https://github.com/catonbrewster1/ButtonMatching"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/catonbrewster1/ButtonMatching">View Demo</a>
+    <a href="https://youtu.be/euX8E9JPdPQ">View Demo</a>
     ·
     <a href="https://github.com/catonbrewster1/ButtonMatching/issues">Report Bug</a>
     ·
