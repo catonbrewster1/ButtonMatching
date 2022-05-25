@@ -10,10 +10,10 @@
     <img src="app/src/main/res/images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">project_title</h3>
+<h3 align="center">Button Bop</h3>
 
   <p align="center">
-    project_description
+    Bop the Buttons from Lowest to Highest!
     <br />
     <a href="https://github.com/catonbrewster1/ButtonMatching"><strong>Explore the docs »</strong></a>
     <br />
@@ -59,9 +59,25 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+Button Bop is a game where the user's goal is to click all of the buttons shown from lowest value to highest value as quickly as possible. 
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+Upon opening the app, the user sees the following screen: 
+
+<img width="163" alt="image" src="https://user-images.githubusercontent.com/84205874/170369710-bc541b4c-c7fd-4302-afa8-01dbf2f33aff.png">
+
+After clicking "CLICK TO START GAME", the user will see a new board of 24 buttons, each displaying a random number between 1 and 100, inclusive. A timer in the top left-hand corner will start ticking immediately. A "Quit Game" button will appear in the top right-hand corner which they can click any time to return to the previous screen above. 
+
+<img width="164" alt="image" src="https://user-images.githubusercontent.com/84205874/170369203-9d7ce7eb-1e4c-413a-8929-fbe388af2335.png">
+
+The goal is to click the buttons from smallest value to largest value as quickly as possible. If an incorrect button is pressed, it will blink and remain on the screen. If the correct button is clicked, it will disappear: 
+
+<img width="164" alt="image" src="https://user-images.githubusercontent.com/84205874/170368833-bbe9c793-1706-431c-bdfb-7ac421a69934.png">
+
+Upon successfully clicking all the buttons, an alert will inform the user of their final time:
+
+<img width="164" alt="image" src="https://user-images.githubusercontent.com/84205874/170369529-a69fead6-43b5-48c2-b186-6663f67a1185.png">
+
+There is a time limit of 10 minutes, after which an alert will notify the user "Time's up!"
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
