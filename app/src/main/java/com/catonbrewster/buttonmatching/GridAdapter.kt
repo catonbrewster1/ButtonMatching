@@ -80,10 +80,6 @@ class GridAdapter(private val context: Context,
                 //otherwise not visible - do nothing
             }
         }
-        //Log.d("NEW MIN:", remainingNums.minOrNull().toString())
-        //Log.d("ORIG LIST:", "$dataSource")
-        //Log.d("NEW LIST:", "$remainingNums")
-
         return tileView
     }
 }

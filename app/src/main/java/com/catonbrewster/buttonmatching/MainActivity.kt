@@ -84,7 +84,6 @@ class MainActivity : AppCompatActivity() {
         } else {
             Log.d(TAG, "Resetting New Game")
             resetGame()
-            Log.d("seconds", "$seconds")
         }
     }
 
