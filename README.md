@@ -10,10 +10,10 @@
     <img src="app/src/main/res/images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">project_title</h3>
+<h3 align="center">Button Bop</h3>
 
   <p align="center">
-    project_description
+    Bop the Buttons from Lowest to Highest!
     <br />
     <a href="https://github.com/catonbrewster1/ButtonMatching"><strong>Explore the docs »</strong></a>
     <br />
@@ -33,136 +33,76 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#about-the-game">About The Game</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
+    <li><a href="#expected-behavior">Expected Behavior</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
 
+<!-- ABOUT THE GAME -->
+## About The Game
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+Button Bop is a game where the user's goal is to click all of the buttons shown from lowest value to highest value as quickly as possible. 
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+Upon opening the app, the user sees the following screen: 
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+<img width="163" alt="image" src="https://user-images.githubusercontent.com/84205874/170369710-bc541b4c-c7fd-4302-afa8-01dbf2f33aff.png">
+
+After clicking "CLICK TO START GAME", the user will see a new board of 24 buttons, each displaying a random number between 1 and 100, inclusive. A timer in the top left-hand corner will start ticking immediately. A "Quit Game" button will appear in the top right-hand corner which they can click any time to exit the game return to the start screen above. 
+
+<img width="164" alt="image" src="https://user-images.githubusercontent.com/84205874/170369203-9d7ce7eb-1e4c-413a-8929-fbe388af2335.png">
+
+The goal is to click the buttons from smallest value to largest value as quickly as possible. If an incorrect button is pressed, it will blink and remain on the screen. If the correct button is clicked, it will disappear: 
+
+<img width="164" alt="image" src="https://user-images.githubusercontent.com/84205874/170368833-bbe9c793-1706-431c-bdfb-7ac421a69934.png">
+
+Upon successfully clicking all the buttons, an alert will inform the user of their final time:
+
+<img width="164" alt="image" src="https://user-images.githubusercontent.com/84205874/170369529-a69fead6-43b5-48c2-b186-6663f67a1185.png">
+
+There is a time limit of 10 minutes, after which an alert will notify the user "Time's up!"
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 ### Built With
 
-* [Next.js](https://nextjs.org/)
-* [React.js](https://reactjs.org/)
-* [Vue.js](https://vuejs.org/)
-* [Angular](https://angular.io/)
-* [Svelte](https://svelte.dev/)
-* [Laravel](https://laravel.com)
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
+* [Kotlin]([https://nextjs.org/](https://kotlinlang.org/docs/home.html))
+* Android Studio
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/github_username/repo_name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+* **To Run App**: Clone the repo, open in Android Studio, ensure you have an emulator running, put the cursor in the editor window, press Ctrl + R to run.
+* **To Run Tests**: Clone the repo, open in Android Studio, select the app/src/test directory, press Ctrl + R to run.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
+<!-- EXPECTED BEHAVIOR -->
+## Expected Behavior
 
-<!-- USAGE EXAMPLES -->
-## Usage
+* When "CLICK TO START GAME" is selected, the start button disappears, a grid of 24 buttons apears, a timer appears and starts counting in the top left-hand corner, a "Quit Game" button appears in the top right-hand corner
+* When "Quit Game" is selected, the user returns to the start page, where the grid, timer, and quit button are hidden, and only a "CLICK TO START GAME" button is show
+* Upon the game starting, when the next lowest button is selected, the button disappears
+* Upon the game starting, when an incorrect button is selected, the button blinks and remains on the screen
+* In landscape orientation, the grid is 4 X 6 
+* In portrait orientation, the grid is 6 X 4
+* When orientation changes, the time is preserved and the grid layout adjusts dynamically
+* All 12 MainActivity tests pass 
+* After 10 minutes, a "Time's Up" alert appears. A user can click anywhere to hide the alert. The user is then at the start screen.
+* After selecting all of the numbers, an alert appears telling the user how long it took them to complete the game. A user can click anywhere to hide the alert.  The user is then at the start screen.
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
-
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -171,23 +111,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+Caton Brewster - catonbrewster@gmail.com
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
