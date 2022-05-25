@@ -86,6 +86,8 @@ There is a time limit of 10 minutes, after which an alert will notify the user "
 ***To Run App**: Clone the repo, open in Android Studio, ensure you have an emulator running, put the cursor in the editor window, press Ctrl + R to run.
 ***To Run Tests**: Clone the repo, open in Android Studio, select the app/src/test directory, press Ctrl + R to run.
 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 
 <!-- FEATURES -->
 ## Features
