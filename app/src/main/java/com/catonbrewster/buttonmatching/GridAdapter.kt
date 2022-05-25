@@ -1,6 +1,7 @@
 package com.catonbrewster.buttonmatching
 
 import android.content.Context
+import android.service.autofill.Validators.not
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -51,9 +52,9 @@ class GridAdapter(private val context: Context,
         remainingNums = (context as MainActivity).seeRemainingNums()
 
         if (remainingNums.contains(number)) {
-            buttonView.setVisibility(View.VISIBLE)
+            tileView.setVisibility(View.VISIBLE)
         } else {
-            buttonView.setVisibility(View.INVISIBLE)
+            tileView.setVisibility(View.INVISIBLE)
         }
 
         val blinkAnimation = AnimationUtils.loadAnimation(context, R.anim.blink)
@@ -72,10 +73,11 @@ class GridAdapter(private val context: Context,
                     remainingNums = (context as MainActivity).seeRemainingNums()
                     this.notifyDataSetChanged()
                 }
-                else {
+                else if (tileView.isVisible) {
                     //wrong button - bounce
                     buttonView.startAnimation(blinkAnimation)
                 }
+                //otherwise not visible - do nothing
             }
         }
         //Log.d("NEW MIN:", remainingNums.minOrNull().toString())
