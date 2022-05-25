@@ -56,7 +56,7 @@ Upon opening the app, the user sees the following screen:
 
 <img width="163" alt="image" src="https://user-images.githubusercontent.com/84205874/170369710-bc541b4c-c7fd-4302-afa8-01dbf2f33aff.png">
 
-After clicking "CLICK TO START GAME", the user will see a new board of 24 buttons, each displaying a random number between 1 and 100, inclusive. A timer in the top left-hand corner will start ticking immediately. A "Quit Game" button will appear in the top right-hand corner which they can click any time to return to the previous screen above. 
+After clicking "CLICK TO START GAME", the user will see a new board of 24 buttons, each displaying a random number between 1 and 100, inclusive. A timer in the top left-hand corner will start ticking immediately. A "Quit Game" button will appear in the top right-hand corner which they can click any time to exit the game return to the start screen above. 
 
 <img width="164" alt="image" src="https://user-images.githubusercontent.com/84205874/170369203-9d7ce7eb-1e4c-413a-8929-fbe388af2335.png">
 
