@@ -83,8 +83,8 @@ There is a time limit of 10 minutes, after which an alert will notify the user "
 <!-- GETTING STARTED -->
 ## Getting Started
 
-***To Run App**: Clone the repo, open in Android Studio, ensure you have an emulator running, put the cursor in the editor window, press Ctrl + R to run.
-***To Run Tests**: Clone the repo, open in Android Studio, select the app/src/test directory, press Ctrl + R to run.
+* **To Run App**: Clone the repo, open in Android Studio, ensure you have an emulator running, put the cursor in the editor window, press Ctrl + R to run.
+* **To Run Tests**: Clone the repo, open in Android Studio, select the app/src/test directory, press Ctrl + R to run.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -103,8 +103,6 @@ There is a time limit of 10 minutes, after which an alert will notify the user "
 * After 10 minutes, a "Time's Up" alert appears. A user can click anywhere to hide the alert. The user is then at the start screen.
 * After selecting all of the numbers, an alert appears telling the user how long it took them to complete the game. A user can click anywhere to hide the alert.  The user is then at the start screen.
 
-
-_For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
