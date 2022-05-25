@@ -127,16 +127,15 @@ class MainActivityTest {
         val minNumPos = numbers.indexOf(minNum)
         val gridAdapter = systemUnderTest.gridAdapter
         val tileBefore = gridAdapter.getView(minNumPos, null, gridView)
-        val tileButtonBefore = tileBefore.findViewById(R.id.gridButton) as Button
+        val tileButton = tileBefore.findViewById(R.id.gridButton) as Button
 
-        tileButtonBefore.performClick()
+        tileButton.performClick()
 
         val tileAfter = gridAdapter.getView(minNumPos, null, gridView)
-        val tileButtonAfter = tileAfter.findViewById(R.id.gridButton) as Button
         val remainingNums = systemUnderTest.remainingNums
 
         //then
-        assertEquals(false, tileButtonAfter.isVisible)
+        assertEquals(false, tileAfter.isVisible)
         assertThat(
             remainingNums,
             not(hasItem(minNum))
@@ -161,16 +160,15 @@ class MainActivityTest {
         val maxNumPos = numbers.indexOf(maxNum)
         val gridAdapter = systemUnderTest.gridAdapter
         val tileBefore = gridAdapter.getView(maxNumPos, null, gridView)
-        val tileButtonBefore = tileBefore.findViewById(R.id.gridButton) as Button
+        val tileButton = tileBefore.findViewById(R.id.gridButton) as Button
 
-        tileButtonBefore.performClick()
+        tileButton.performClick()
 
         val tileAfter = gridAdapter.getView(maxNumPos, null, gridView)
-        val tileButtonAfter = tileAfter.findViewById(R.id.gridButton) as Button
         val remainingNums = systemUnderTest.remainingNums
 
         //then
-        assertEquals(true, tileButtonAfter.isVisible)
+        assertEquals(true, tileAfter.isVisible)
         assertThat(
             remainingNums,
             hasItem(maxNum)
