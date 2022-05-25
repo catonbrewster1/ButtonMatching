@@ -41,7 +41,7 @@
     <li>
       <a href="#getting-started">Getting Started</a>
     </li>
-    <li><a href="#features">Usage</a></li>
+    <li><a href="#expected-behavior">Usage</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -89,14 +89,25 @@ There is a time limit of 10 minutes, after which an alert will notify the user "
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-<!-- FEATURES -->
-## Features
+<!-- EXPECTED BEHAVIOR -->
+## Expected Behavior
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+* When "CLICK TO START GAME" is selected, the start button disappears, a grid of 24 buttons apears, a timer appears and starts counting in the top left-hand corner, a "Quit Game" button appears in the top right-hand corner
+* When "Quit Game" is selected, the user returns to the start page, where the grid, timer, and quit button are hidden, and only a "CLICK TO START GAME" button is show
+* Upon the game starting, when the next lowest button is selected, the button disappears
+* Upon the game starting, when an incorrect button is selected, the button blinks and remains on the screen
+* In landscape orientation, the grid is 4 X 6 
+* In portrait orientation, the grid is 6 X 4
+* When orientation changes, the time is preserved and the grid layout adjusts dynamically
+* All 12 MainActivity tests pass 
+* After 10 minutes, a "Time's Up" alert appears. A user can click anywhere to hide the alert. The user is then at the start screen.
+* After selecting all of the numbers, an alert appears telling the user how long it took them to complete the game. A user can click anywhere to hide the alert.  The user is then at the start screen.
+
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
 
 
 <!-- CONTACT -->
